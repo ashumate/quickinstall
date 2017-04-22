@@ -11,14 +11,20 @@ apt-get -qq -y update && apt-get -qq -y dist-upgrade
 
 #Install stuff I use all the time
 echo -e "\nInstalling default packages...\n"
-apt-get -qq -y install build-essential checkinstall docker.io fail2ban git git-core libbz2-dev libc6-dev libgdbm-dev libncursesw5-dev libreadline-gplv2-dev libsqlite3-dev libssl-dev nikto nmap nodejs python-dev python-numpy python-scipy python-setuptools tk-dev unattended-upgrades ufw
+apt-get -qq -y install build-essential checkinstall fail2ban git git-core libbz2-dev libc6-dev libgdbm-dev libncursesw5-dev libreadline-gplv2-dev libsqlite3-dev libssl-dev nikto nmap nodejs python-dev python-numpy python-scipy python-setuptools tk-dev unattended-upgrades ufw
 
+#Install MSF
+curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && \
+  chmod 755 msfinstall && \
+  ./msfinstall
 
 #Install and configure firewall
 echo -e "\nConfiguring firewall...\n"
 ufw default deny incoming
 ufw default allow outgoing
 ufw allow ssh
+ufw allow http
+ufw allow https
 
 sed -i.bak 's/ENABLED=no/ENABLED=yes/g' /etc/ufw/ufw.conf
 chmod 0644 /etc/ufw/ufw.conf
@@ -28,28 +34,28 @@ echo -e "\nUpdating Timezone to UTC...\n"
 sudo timedatectl set-timezone UTC
 
 #Install Ruby
-echo -e "\nInstalling Ruby...\n"
-curl -L https://get.rvm.io | bash -s stable --ruby
+#echo -e "\nInstalling Ruby...\n"
+#curl -L https://get.rvm.io | bash -s stable --ruby
 
 #PCAP Everything
-echo -e "\nRunning docker: pcap...\n"
-docker run -v ~/pcap:/pcap --net=host -d jgamblin/tcpdump
+#echo -e "\nRunning docker: pcap...\n"
+#docker run -v ~/pcap:/pcap --net=host -d jgamblin/tcpdump
 
 #Add admin group
-echo -e "\nAdding Admin group\n"
-groupadd admin
+#echo -e "\nAdding Admin group\n"
+#groupadd admin
 
 #Add unprivileged user account
-echo -e "\nAdding unpriviliged user\n"
-useradd -m -G admin -s /bin/bash ashumate
+#echo -e "\nAdding unpriviliged user\n"
+#useradd -m -G admin -s /bin/bash ashumate
 
 #Add .ssh directory and change ownership/permisions then add ssh key
-echo -e "\nAdding SSH key\n"
-mkdir -p /home/ashumate/.ssh/
-chown ashumate /home/ashumate/.ssh/
-chgrp ashumate /home/ashumate/.ssh/
-chmod 744 /home/ashumate/.ssh
-echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB2pyyeH437qzQ9H0zkjpDdYBT6B9+67OBppnFQ+qIGh ashumate@Andrews-MacBook-Pro.local" > /home/ashumate/.ssh/authorized_keys
+#echo -e "\nAdding SSH key\n"
+#mkdir -p /home/ashumate/.ssh/
+#chown ashumate /home/ashumate/.ssh/
+#chgrp ashumate /home/ashumate/.ssh/
+#chmod 744 /home/ashumate/.ssh
+#echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB2pyyeH437qzQ9H0zkjpDdYBT6B9+67OBppnFQ+qIGh ashumate@Andrews-MacBook-Pro.local" > /home/ashumate/.ssh/authorized_keys
 
 #Reboot server
 reboot now
