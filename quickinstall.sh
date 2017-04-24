@@ -11,7 +11,7 @@ apt-get -qq -y update && apt-get -qq -y dist-upgrade
 
 #Install stuff I use all the time
 echo -e "\nInstalling default packages...\n"
-apt-get -qq -y install build-essential checkinstall fail2ban git git-core libbz2-dev libc6-dev libgdbm-dev libncursesw5-dev libreadline-gplv2-dev libsqlite3-dev libssl-dev nikto nmap nodejs python-dev python-numpy python-scipy python-setuptools tk-dev unattended-upgrades ufw
+apt-get -qq -y install fail2ban git git-core ufw
 
 #Install MSF
 curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && \
