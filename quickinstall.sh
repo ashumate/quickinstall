@@ -10,25 +10,26 @@ echo -e "\nRunning a package upgrade...\n"
 apt-get -qq -y update && apt-get -qq -y dist-upgrade
 
 #Add logon banner
-rm /etc/issue.net
-sed -i '$ a\n
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n
-                                                                               \n
-       AAA   TTTTTTT TTTTTTT EEEEEEE NN   NN TTTTTTT IIIII  OOOOO  NN   NN     \n
-      AAAAA    TTT     TTT   EE      NNN  NN   TTT    III  OO   OO NNN  NN     \n
-     AA   AA   TTT     TTT   EEEEE   NN N NN   TTT    III  OO   OO NN N NN     \n
-     AAAAAAA   TTT     TTT   EE      NN  NNN   TTT    III  OO   OO NN  NNN     \n
-     AA   AA   TTT     TTT   EEEEEEE NN   NN   TTT   IIIII  OOOOO  NN   NN     \n
-                                                                               \n
-                                                                               \n
-             If you're not expected then you're not invited!                   \n
-                                                                               \n
-             This is a private system and all access attempts                  \n
-                will be logged for appropriate action.                         \n
-                                                                               \n
-                                                                               \n
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n
-'/etc/issue.net
+#This is currently broken, will fix later
+#rm /etc/issue.net
+#sed -i '$ a\n
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n
+#                                                                               \n
+#       AAA   TTTTTTT TTTTTTT EEEEEEE NN   NN TTTTTTT IIIII  OOOOO  NN   NN     \n
+#      AAAAA    TTT     TTT   EE      NNN  NN   TTT    III  OO   OO NNN  NN     \n
+#     AA   AA   TTT     TTT   EEEEE   NN N NN   TTT    III  OO   OO NN N NN     \n
+#     AAAAAAA   TTT     TTT   EE      NN  NNN   TTT    III  OO   OO NN  NNN     \n
+#     AA   AA   TTT     TTT   EEEEEEE NN   NN   TTT   IIIII  OOOOO  NN   NN     \n
+#                                                                               \n
+#                                                                               \n
+#             If you're not expected then you're not invited!                   \n
+#                                                                              \n
+#             This is a private system and all access attempts                  \n
+#                will be logged for appropriate action.                         \n
+#                                                                               \n
+#                                                                               \n
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n
+#'/etc/issue.net
 
 
 #Install stuff I use all the time
