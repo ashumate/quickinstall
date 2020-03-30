@@ -7,6 +7,7 @@
 
 # Upgrade installed packages to latest
 echo -e "\nRunning a package upgrade...\n"
+debian_frontend=noninteractive
 apt-get -qq -y update && apt-get -qq -y dist-upgrade
 
 #Add logon banner
@@ -75,9 +76,8 @@ sudo timedatectl set-timezone UTC
 #Add .ssh directory and change ownership/permisions then add ssh key
 #echo -e "\nAdding SSH key\n"
 #mkdir -p /home/ashumate/.ssh/
-#chown ashumate /home/ashumate/.ssh/
-#chgrp ashumate /home/ashumate/.ssh/
-#chmod 744 /home/ashumate/.ssh
+#chown ashumate:admin /home/ashumate/.ssh/
+#chmod 700 /home/ashumate/.ssh
 #echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB2pyyeH437qzQ9H0zkjpDdYBT6B9+67OBppnFQ+qIGh ashumate@Andrews-MacBook-Pro.local" > /home/ashumate/.ssh/authorized_keys
 
 #Reboot server
