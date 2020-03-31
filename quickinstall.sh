@@ -11,36 +11,25 @@ debian_frontend=noninteractive
 apt-get -qq -y update && apt-get -qq -y dist-upgrade
 
 #Add logon banner
-#This is currently broken, will fix later
-#rm /etc/issue.net
-#sed -i '$ a\n
-#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n
-#                                                                               \n
-#       AAA   TTTTTTT TTTTTTT EEEEEEE NN   NN TTTTTTT IIIII  OOOOO  NN   NN     \n
-#      AAAAA    TTT     TTT   EE      NNN  NN   TTT    III  OO   OO NNN  NN     \n
-#     AA   AA   TTT     TTT   EEEEE   NN N NN   TTT    III  OO   OO NN N NN     \n
-#     AAAAAAA   TTT     TTT   EE      NN  NNN   TTT    III  OO   OO NN  NNN     \n
-#     AA   AA   TTT     TTT   EEEEEEE NN   NN   TTT   IIIII  OOOOO  NN   NN     \n
-#                                                                               \n
-#                                                                               \n
-#             If you're not expected then you're not invited!                   \n
-#                                                                              \n
-#             This is a private system and all access attempts                  \n
-#                will be logged for appropriate action.                         \n
-#                                                                               \n
-#                                                                               \n
-#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n
-#'/etc/issue.net
-
+echo -e '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n'>/etc/issue.net
+echo -e "       AAA   TTTTTTT TTTTTTT EEEEEEE NN   NN TTTTTTT IIIII  OOOOO  NN   NN">>/etc/issue.net
+echo -e "      AAAAA    TTT     TTT   EE      NNN  NN   TTT    III  OO   OO NNN  NN">>/etc/issue.net
+echo -e "     AA   AA   TTT     TTT   EEEEE   NN N NN   TTT    III  OO   OO NN N NN">>/etc/issue.net
+echo -e "     AAAAAAA   TTT     TTT   EE      NN  NNN   TTT    III  OO   OO NN  NNN">>/etc/issue.net
+echo -e "     AA   AA   TTT     TTT   EEEEEEE NN   NN   TTT   IIIII  OOOOO  NN   NN\n">>/etc/issue.net
+echo -e "         If you're not expected then you're not invited so fuck off"'! \n'>>/etc/issue.net
+echo -e "             This is a private system and all access attempts">>/etc/issue.net
+echo -e "                 will be logged for appropriate action.\n\n">>/etc/issue.net
+echo -e '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'>>/etc/issue.net
 
 #Install stuff I use all the time
 echo -e "\nInstalling default packages...\n"
 apt-get -qq -y install fail2ban git git-core ufw
 
 #Install MSF
-curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && \
-  chmod 755 msfinstall && \
-  ./msfinstall
+#curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && \
+#  chmod 755 msfinstall && \
+#  ./msfinstall
 
 #Install and configure firewall
 echo -e "\nConfiguring firewall...\n"
@@ -66,19 +55,19 @@ sudo timedatectl set-timezone UTC
 #docker run -v ~/pcap:/pcap --net=host -d jgamblin/tcpdump
 
 #Add admin group
-#echo -e "\nAdding Admin group\n"
-#groupadd admin
+echo -e "\nAdding Admin group\n"
+groupadd admin
 
 #Add unprivileged user account
-#echo -e "\nAdding unpriviliged user\n"
-#useradd -m -G admin -s /bin/bash ashumate
+echo -e "\nAdding unpriviliged user\n"
+useradd -m -G admin -s /bin/bash ashumate
 
 #Add .ssh directory and change ownership/permisions then add ssh key
-#echo -e "\nAdding SSH key\n"
-#mkdir -p /home/ashumate/.ssh/
-#chown ashumate:admin /home/ashumate/.ssh/
-#chmod 700 /home/ashumate/.ssh
-#echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB2pyyeH437qzQ9H0zkjpDdYBT6B9+67OBppnFQ+qIGh ashumate@Andrews-MacBook-Pro.local" > /home/ashumate/.ssh/authorized_keys
+echo -e "\nAdding SSH key\n"
+mkdir -p /home/ashumate/.ssh/
+chown ashumate:admin /home/ashumate/.ssh/
+chmod 700 /home/ashumate/.ssh
+echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB2pyyeH437qzQ9H0zkjpDdYBT6B9+67OBppnFQ+qIGh ashumate@Andrews-MacBook-Pro.local" > /home/ashumate/.ssh/authorized_keys
 
 #Reboot server
 reboot now
